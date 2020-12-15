@@ -1,6 +1,6 @@
 myems_demo_db = {
-    'user': 'myemsdemo',
-    'password': 'myemsdemo',
+    'user': 'yourusername',
+    'password': 'yourpassword',
     'host': 'db4free.net',
-    'database': 'myemsdemo',
+    'database': 'yourdatabase',
 }
