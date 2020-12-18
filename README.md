@@ -16,13 +16,13 @@ mysql.connector
 Download and install MySQL Connector:
 ```
 $ cd ~/tools
-$ wget https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-8.0.20.tar.gz
+$ wget https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-8.0.22.tar.gz
 $ tar xzf mysql-connector-python-8.0.22.tar.gz
 $ cd ~/tools/mysql-connector-python-8.0.22
 $ sudo python3 setup.py install
 ```
 
-Sign up an account at https://www.db4free.net
+Sign up an account at freemysqlhosting.net
 
 Download the sql script file from:
 ```
@@ -37,7 +37,7 @@ Modify the config.py with your own account at db4free.
 
 ### References
 
-[1]. https://www.db4free.net/
+[1]. https://www.freemysqlhosting.net/
 
 [2]. https://dev.mysql.com/doc/connector-python/en/
 
