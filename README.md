@@ -31,9 +31,16 @@ $ wget https://github.com/myems/myems-database/blob/master/myems_system_db.sql
 
 Replace 'myems_system_db' with your own database name in the script.
 
-Run the sql script in phpMyAdmin at db4free.net
+Connect to the server at freemysqlhosting.net
 
-Modify the config.py with your own account at db4free.
+Run the sql script
+
+Modify the config.py with your own account at freemysqlhosting.net.
+
+Coding 
+
+Submit pull request
+
 
 ### References
 
