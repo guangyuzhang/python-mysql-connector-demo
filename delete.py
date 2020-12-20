@@ -12,8 +12,34 @@ import config
 ########################################################################################################################
 def main(logger):
     # TODO
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+        cursor = cnx.cursor()
 
-    pass
+        query = ("SELECT * FROM tbl_energy_categories")
+
+        cursor.execute(query)
+
+        for (id, name, uuid, unit_of_measure, kgce, kgco2e) in cursor:
+            print("id:{}, name:{}, uuid:{}, unit_of_measure:{}, kgce:{}, kgco2e:{}".format(id, name, uuid, unit_of_measure, kgce, kgco2e))
+
+        query = ("DELETE FROM tbl_energy_categories WHERE name=%(name)s")
+
+        cursor.execute(query,{"name":"中水"})
+
+        cnx.commit()
+
+    except Exception as e:
+        cnx.rollback()
+        logger.error(str(e))
+
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cursor.close()
 
 
 if __name__ == "__main__":

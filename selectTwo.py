@@ -11,8 +11,32 @@ import config
 ########################################################################################################################
 def main(logger):
     # TODO
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+        cursor =cnx.cursor()
 
-    pass
+        query = ("SELECT * FROM tbl_spaces")
+
+        cursor.execute(query)
+
+        for (id,name,uuid,parent_space_id,area,timezone_id,is_input_counted,is_output_counted,contact_id,cost_center_id,description) in cursor:
+            print("id:{},name:{},uuid:{},parent_space_id:{},area:{},timezone_id:{},is_input_counted:{},is_output_counted:{},contact_id:{},cost_center_id:{},description:{}".format(
+                id, name, uuid, parent_space_id, area, timezone_id, is_input_counted, is_output_counted, contact_id,
+                cost_center_id, description
+            ))
+
+    except Exception as e:
+        logger.error(str(e))
+
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cursor.close()
+
+
 
 
 if __name__ == "__main__":
