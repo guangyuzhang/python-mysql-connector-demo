@@ -2,6 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import mysql.connector
 import config
+import datetime
 
 
 ########################################################################################################################
@@ -12,8 +13,37 @@ import config
 ########################################################################################################################
 def main(logger):
     # TODO
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+        cursor = cnx.cursor()
 
-    pass
+        query = ("SELECT * FROM tbl_versions")
+
+        cursor.execute(query)
+
+        for (id, version, release_date) in cursor:
+            print("id:{},version:{},release_date:{}".format(
+                    id, version, release_date))
+
+        query = ("UPDATE tbl_versions SET version=%s, release_date=%s WHERE id=1")
+
+        update_date=('2.0.0',datetime.date.today())
+
+        cursor.execute(query,update_date)
+
+        cnx.commit()
+
+    except Exception as e:
+        cnx.rollback()
+        logger.error(str(e))
+
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cursor.close()
 
 
 if __name__ == "__main__":
