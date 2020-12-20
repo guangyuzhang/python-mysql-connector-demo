@@ -32,12 +32,10 @@ def main(logger):
     else:
         for item in cursor.fetchall():
             print(item)
-    detele = '''
-        DELETE FROM tbl_energy_categories 
-        WHERE name = "水中"
-        '''
+    detele = 'delete from tbl_energy_categories where name = %(name)s'
+    detele_data = {'name': '中水'}
     try:
-        cursor.execute(detele)
+        cursor.execute(detele, detele_data)
         cnx.commit()
     except mysql.connector.Error as err:
         logger.error("Error in delete SQL syntax" + str(err))
