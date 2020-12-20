@@ -1,0 +1,8 @@
+2020-12-19 21:30:19,306 - mysql-connector-demo - INFO - selecte success in:2020-12-19 21:30:19.306568
+2020-12-19 21:31:29,164 - mysql-connector-demo - ERROR - Error in insert SQL syntax1136 (21S01): Column count doesn't match value count at row 1
+2020-12-19 21:34:02,178 - mysql-connector-demo - INFO - insert success in:2020-12-19 21:34:02.178221
+2020-12-19 21:37:17,030 - mysql-connector-demo - INFO - update success in:2020-12-19 21:37:17.030068
+2020-12-19 21:40:12,717 - mysql-connector-demo - ERROR - Error in delete SQL syntax1054 (42S22): Unknown column '��ˮ' in 'where clause'
+2020-12-19 21:54:43,063 - mysql-connector-demo - ERROR - Error in delete SQL syntax1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1
+2020-12-19 22:07:07,143 - mysql-connector-demo - ERROR - Error in delete SQL syntax1267 (HY000): Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8mb4_general_ci,COERCIBLE) for operation '='
+2020-12-20 09:11:20,389 - mysql-connector-demo - INFO - delete success in:2020-12-20 09:11:20.389754

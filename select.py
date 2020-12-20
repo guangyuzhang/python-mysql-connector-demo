@@ -2,7 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import mysql.connector
 import config
-
+from datetime import datetime
 
 ########################################################################################################################
 # PROCEDURES:
@@ -10,9 +10,28 @@ import config
 # Step 2: Print the result
 ########################################################################################################################
 def main(logger):
-    # TODO
-
-    pass
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM tbl_spaces")
+    except mysql.connector.Error as err:
+        if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
+            logger.error("Something is wrong with your user name or password" + str(err))
+        elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+            logger.error("Database does not exist" + str(err))
+        else:
+            logger.error("Error in selectc SQL syntax" + str(err))
+    else:
+        for item in cursor.fetchall():
+            print(item)
+        logger.info("selecte success in:" + str(datetime.now()))
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cnx.close()
 
 
 if __name__ == "__main__":
