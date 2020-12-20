@@ -2,6 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import mysql.connector
 import config
+import uuid
 
 
 ########################################################################################################################
@@ -12,8 +13,32 @@ import config
 ########################################################################################################################
 def main(logger):
     # TODO
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+        cursor = cnx.cursor()
+        cursor.execute("select * from  tbl_contacts")
+        for item in cursor.fetchall():
+            print(item)
+        insert = ('INSERT INTO tbl_contacts '
+                      '(id,name,uuid,email,phone,description) '
+                      'VALUES(%s,%s,%s,%s,%s,%s)')
+        uuid_number=str(uuid.uuid1())
 
-    pass
+        insert_data = (None, 'malizheng', uuid_number, 'mlz@myems.io', '+8615736158996', 'Building ')
+        cursor.execute(insert,insert_data)
+        cnx.commit()
+    except Exception as e:
+        logger.error("Error in insert process" + str(e))
+    else:
+        logger.info("insert success ")
+        print("insert success")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cnx.close()
 
 
 if __name__ == "__main__":
