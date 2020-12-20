@@ -1,18 +1,43 @@
 import logging
 from logging.handlers import RotatingFileHandler
+
 import mysql.connector
 import config
 
 
-########################################################################################################################
+
+# #######################################################################################################################
 # PROCEDURES:
 # Step 1: Select all space from tbl_spaces
 # Step 2: Print the result
-########################################################################################################################
+# #######################################################################################################################
 def main(logger):
     # TODO
 
-    pass
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+    except mysql.connector.Error as e:
+        print('connect fails{]'.format(e))
+    cursor = cnx.cursor()
+    try:
+        mysql_query=("SELECT  * FROM tbl_spaces")
+        cursor.execute(mysql_query)
+        for item in cursor.fetchall():
+            print(item)
+    except Exception as e:
+        logger.error('select error!' + str(e))
+        print('select error!{}'.format(e))
+    else:
+        logger.info("select success ")
+        print("select success ")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cnx.close()
+
+
+
 
 
 if __name__ == "__main__":
@@ -33,3 +58,4 @@ if __name__ == "__main__":
     logger.addHandler(fh)
 
     main(logger)
+    # main()

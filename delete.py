@@ -13,13 +13,37 @@ import config
 def main(logger):
     # TODO
 
-    pass
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+    except mysql.connector.Error as e:
+        print('connect fails{]'.format(e))
+    cursor = cnx.cursor()
+    try:
+        mysql_query = 'select * from tbl_energy_categories'
+        cursor.execute(mysql_query)
+        for item in cursor.fetchall():
+            print(item)
+        delete = "delete from tbl_energy_categories where name ='中水'"
+        cursor.execute(delete)
+        cnx.commit()
+    except mysql.connector.Error as e:
+        logger.error('delete error!' + str(e))
+        print('delete error!{}'.format(e))
+    else:
+        logger.error('测试写入日志delete error!')
+        logger.info("delete success")
+        print("delete success!")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cnx.close()
 
 
 if __name__ == "__main__":
     """main"""
     # create logger
-    logger = logging.getLogger('mysql-connector-demo')
+    logger = logging.getLogger()
     # specifies the lowest-severity log message a logger will handle,
     # where debug is the lowest built-in severity level and critical is the highest built-in severity.
     # For example, if the severity level is INFO, the logger will handle only INFO, WARNING, ERROR, and CRITICAL
@@ -34,3 +58,4 @@ if __name__ == "__main__":
     logger.addHandler(fh)
 
     main(logger)
+    # main()
