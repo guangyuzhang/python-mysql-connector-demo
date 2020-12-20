@@ -1,7 +1,10 @@
 myems_demo_db = {
-    'user': 'USERNAME',
-    'password': 'PASSWORD',
-    'host': 'HOSTID.freemysqlhosting.net',
-    'database': 'DATABASE',
+    'user': 'sql12383134',
+    'password': 'sLJWLaQGS4',
+    'host': 'sql12.freemysqlhosting.net',
+    'database': 'sql12383134',
     'port': 3306,
 }
+
+
+
