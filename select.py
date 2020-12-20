@@ -4,6 +4,7 @@ import mysql.connector
 import config
 
 
+
 ########################################################################################################################
 # PROCEDURES:
 # Step 1: Select all space from tbl_spaces
@@ -12,7 +13,28 @@ import config
 def main(logger):
     # TODO
 
-    pass
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(**config.myems_demo_db)
+        cursor = cnx.cursor()
+        query=("SELECT  * FROM tbl_spaces")
+        cursor.execute(query)
+        for item in cursor.fetchall():
+            print(item)
+    except Exception as e:
+        logger.error("Error in select process"+str(e))
+    else:
+        logger.info("select success ")
+        print("select success ")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx:
+            cnx.close()
+
+
+
 
 
 if __name__ == "__main__":
