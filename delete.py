@@ -12,8 +12,14 @@ import config
 ########################################################################################################################
 def main(logger):
     # TODO
+    mydb = mysql.connector.connect(**config.config)
+    mycursor = mydb.cursor()
+    delete = ("delete from tbl_energy_categories where name ='中水'")
+    mycursor.execute(delete)
+    mydb.commit()
 
-    pass
+    mycursor.close()
+    mydb.close()
 
 
 if __name__ == "__main__":

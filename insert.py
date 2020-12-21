@@ -13,7 +13,25 @@ import config
 def main(logger):
     # TODO
 
-    pass
+    mydb = mysql.connector.connect(**config.config)
+    mycursor = mydb.cursor()
+
+    insert = ("INSERT INTO tbl_contacts "
+              "(id,name,uuid,email,phone,description) "
+              "VALUES(%s,%s,%s,%s,%s,%s)")
+    insert_data = {
+            'id': 327,
+            'name': 'Dongchuan Yang',
+            'uid': 'asdf3e34-e3d0-234d-w3e2-w3e2e44r5twg4',
+            'email': '1277885105@qq.com',
+            'phone': '+8615723072896',
+            'description': 'building ',
+        }
+    mycursor.execute(insert, insert_data)
+    mydb.commit()
+
+    mycursor.cloce()
+    mydb.close()
 
 
 if __name__ == "__main__":
