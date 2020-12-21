@@ -1,3 +1,4 @@
+import datetime
 import logging
 from logging.handlers import RotatingFileHandler
 import mysql.connector
@@ -13,7 +14,16 @@ import config
 def main(logger):
     # TODO
 
-    pass
+    mydb = mysql.connector.connect(**config.config)
+    mycursor = mydb.cursor()
+
+    update = ("update tbl_versions set version=%s,release_date=%s where id='1'")
+    time_now = datetime.now()
+    mycursor.execute(update, '2.0.0', time_now)
+    mydb.commit()
+
+    mycursor.close()
+    mydb.close()
 
 
 if __name__ == "__main__":
